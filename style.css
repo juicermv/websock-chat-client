@@ -50,12 +50,9 @@ html {
 .main {
     text-align: center;
     background-color:white;
-    border: 2px red dashed;
-    border-radius: 5px;
-    width: 80%;
+    width: 100%;
     display: block;
     position: absolute;
-    margin: 10px auto;
     padding: 10px 0px;
 }
 a {
