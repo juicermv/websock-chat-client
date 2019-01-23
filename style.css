@@ -51,6 +51,7 @@ html {
     text-align: center;
     background-color:white;
     border: 2px red dashed;
+    border-radius: 5px;
     width: 80%;
     display: block;
     position: fixed;
