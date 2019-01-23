@@ -54,7 +54,7 @@ html {
     border-radius: 5px;
     width: 80%;
     display: block;
-    position: fixed;
+    position: absolute;
     margin: 10px auto;
     padding: 10px 0px;
 }
