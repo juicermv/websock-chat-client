@@ -3,12 +3,6 @@ body {
     color: #808080;
     text-decoration: none;
     display: flex;
-    position: fixed;
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0;
     background-color: gray;
     cursor: none;
 }
@@ -55,6 +49,12 @@ body {
     display: block;
   	margin: 10px auto;
     padding: 10px 0px;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
 }
 a {
     text-decoration: none;
