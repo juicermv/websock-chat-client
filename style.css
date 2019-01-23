@@ -43,6 +43,10 @@ body {
     animation: anim 0.5s forwards;
 }
 
+html {
+    height: 100vh;
+}
+
 .main {
     text-align: center;
     background-color:white;
@@ -51,7 +55,6 @@ body {
     display: block;
   	margin: 10px auto;
     padding: 10px 0px;
-    height: 100vh;
 }
 a {
     text-decoration: none;
