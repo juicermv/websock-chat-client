@@ -6,7 +6,7 @@ body {
     background-color: gray;
     cursor: none;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     content: "";
 }
 *{
