@@ -50,7 +50,7 @@ body {
     border: 2px red dashed;
     width: 80%;
     display: block;
-  	margin: 0 auto;
+  	margin: auto;
     padding: 10px 0px;
     height: 100%;
 }
