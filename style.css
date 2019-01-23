@@ -51,9 +51,9 @@ html {
     text-align: center;
     background-color:white;
     border: 2px red dashed;
+    border-radius: 10%;
     width: 80%;
     display: block;
-  	margin: 10px auto;
     padding: 10px 0px;
 }
 a {
