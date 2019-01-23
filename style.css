@@ -52,6 +52,7 @@ body {
     display: block;
   	margin: 10px auto;
     padding: 10px 0px;
+    height: 100%;
 }
 a {
     text-decoration: none;
