@@ -3,15 +3,17 @@ body {
     color: #808080;
     text-decoration: none;
     display: flex;
-    background-color: gray;
+    background-color: white;
     cursor: none;
     width: 100%;
     content: "";
 }
-*{
+
+* {
     cursor: none;
 }
-.cursor{
+
+.cursor {
     width: 20px;
     height: 20px;
     background-color: transparent;
@@ -22,19 +24,22 @@ body {
     pointer-events: none;
     visibility: hidden;
 }
-.cursor::after{
+
+.cursor::after {
     width: 20px;
     height: 20px;
 }
 
-@keyframes anim{
-    0%{
+@keyframes anim {
+    0% {
         transform: scale(1);
     }
-    50%{
+
+    50% {
         transform: scale(2);
     }
-    100%{
+
+    100% {
         transform: scale(1);
     }
 }
@@ -49,16 +54,18 @@ html {
 
 .main {
     text-align: center;
-    background-color:white;
+    background-color: transparent;
     width: 100%;
     display: block;
     position: absolute;
     padding: 10px 0px;
     height: 100%;
 }
+
 a {
     text-decoration: none;
 }
+
 button {
     display: block;
     text-decoration: none;
@@ -76,6 +83,7 @@ button:hover {
     color: white;
 
 }
+
 .bigbutton {
     display: block;
     text-decoration: none;
@@ -107,6 +115,7 @@ button:hover {
     height: 20;
     margin: 10px auto;
 }
+
 .textbox:hover {
     background-color: palevioletred;
     color: white;
@@ -117,10 +126,12 @@ button:hover {
     font-family: Arial, Helvetica, sans-serif;
     text-decoration: none;
 }
+
 .text:hover {
     Color: palevioletred;
 
 }
+
 .box {
     background-color: #C9CCCF;
     border: 2px #BFC2C5 solid;
@@ -129,5 +140,3 @@ button:hover {
     display: inline-block;
     widows: 200px;
 }
-  
-  
