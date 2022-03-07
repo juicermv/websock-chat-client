@@ -53,6 +53,7 @@ function onMessage(e){
             break
         case "MSGS":
             var jsons = message.substring(message.indexOf(' ') + 1);
+            jsosn = jsons.replace("\"", '\\"')
             var json = JSON.parse(jsons.replace(/'/g, '"'))
             for (var i = 0; i < json.length; i++){
                 handleMessage(json[i])
@@ -60,6 +61,7 @@ function onMessage(e){
             break
         case "MSG":
             var jsons = message.substring(message.indexOf(' ') + 1);
+            jsosn = jsons.replace("\"", '\\"')
             console.log(jsons)
             handleMessage(JSON.parse(jsons.replace(/'/g, '"')))
             break
