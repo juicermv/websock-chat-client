@@ -52,18 +52,18 @@ function onMessage(e){
             } else { alert("Login failed."); socket = null }
             break
         case "MSGS":
-            var jsons = message.substring(message.indexOf(' ') + 1);
-            jsosn = jsons.replace("\"", '\\"')
-            var json = JSON.parse(jsons.replace(/'/g, '"'))
+            var jsons = message.substring(message.indexOf(' ') + 1)
+            console.log(jsons)
+            
+            var json = JSON.parse(jsons)
             for (var i = 0; i < json.length; i++){
                 handleMessage(json[i])
             }
             break
         case "MSG":
-            var jsons = message.substring(message.indexOf(' ') + 1);
-            jsosn = jsons.replace("\"", '\\"')
+            var jsons = message.substring(message.indexOf(' ') + 1)
             console.log(jsons)
-            handleMessage(JSON.parse(jsons.replace(/'/g, '"')))
+            handleMessage(JSON.parse(jsons))
             break
     }
 }
