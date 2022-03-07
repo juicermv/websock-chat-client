@@ -11,7 +11,7 @@ var token = null;
 mainpage.style.visibility = "hidden";
 
 function login(){
-    socket = new WebSocket("ws://"+ipbox.value.replace("ws://",""))
+    socket = new WebSocket("wss://"+ipbox.value.replace("ws://",""))
     socket.onmessage = onMessage;
     socket.onopen = function (e) {
         socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
