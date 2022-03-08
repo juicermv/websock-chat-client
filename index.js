@@ -11,6 +11,9 @@ var timerID = 0;
 
 mainpage.style.visibility = "hidden";
 
+if (checkACookieExists("server") && checkACookieExists(token))
+    login()
+
 function keepAlive() { 
     var timeout = 20000;  
     if (socket.readyState == socket.OPEN) {  
@@ -42,11 +45,6 @@ function getCookie(cookie) {
 
 function checkACookieExists(cookie) {
     return (document.cookie.split(';').some((item) => item.trim().startsWith(`${cookie}=`))) 
-}
-
-document.onload = function (e) {
-    if (checkACookieExists("server") && checkACookieExists(token))
-        login()
 }
 
 function login(){
