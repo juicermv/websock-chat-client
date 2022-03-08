@@ -7,16 +7,29 @@ const messagelist = document.getElementById("messagelist")
 const msginput = document.getElementById("msginput")
 var socket = null;
 var token = null;
-var tm = null;
+var timerID = 0; 
 
 mainpage.style.visibility = "hidden";
+
+function keepAlive() { 
+    var timeout = 20000;  
+    if (webSocket.readyState == webSocket.OPEN) {  
+        webSocket.send('');  
+    }  
+    timerId = setTimeout(keepAlive, timeout);  
+}  
+function cancelKeepAlive() {  
+    if (timerId) {  
+        clearTimeout(timerId);  
+    }  
+}
 
 function login(){
     socket = new WebSocket("wss://"+ipbox.value.replace("ws://","").replace("wss://", ""))
     socket.onmessage = onMessage;
     socket.onopen = function (e) {
-        setInterval(ping, 30000);
         socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
+        keepAlive();
     }
 
     socket.onclose = function (e) {
@@ -24,18 +37,8 @@ function login(){
         mainpage.style.visibility = "hidden";
         loginform.style.visibility = "visible";
         tm = null;
+        cancelKeepAlive();
     }
-}
-
-function ping() {
-    socket.send('__ping__');
-    tm = setTimeout(function () {
-        ping()
-    }, 5000);
-}
-
-function pong() {
-    clearTimeout(tm);
 }
 
 function handleMessage(message){
