@@ -12,7 +12,7 @@ var timerID = 0;
 mainpage.style.visibility = "hidden";
 
 function keepAlive() { 
-    var timeout = 20000;  
+    var timeout = 5000;  
     if (socket.readyState == socket.OPEN) {  
         socket.send('PING');  
     }  
@@ -61,7 +61,7 @@ function login(){
         {
             socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
         }
-        //keepAlive();
+        keepAlive();
     }
 
     socket.onclose = function (e) {
@@ -69,7 +69,7 @@ function login(){
         mainpage.style.visibility = "hidden";
         loginform.style.visibility = "visible";
         tm = null;
-        //cancelKeepAlive();
+        cancelKeepAlive();
     }
 }
 
