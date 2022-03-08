@@ -12,7 +12,10 @@ var timerID = 0;
 mainpage.style.visibility = "hidden";
 
 if (checkACookieExists("server") && checkACookieExists(token))
+{
+    ipbox.value = getCookie("server")
     login()
+}
 
 function keepAlive() { 
     var timeout = 20000;  
@@ -52,7 +55,7 @@ function login(){
     socket.onmessage = onMessage;
     socket.onopen = function (e) {
         if(checkACookieExists("token")) {
-            socket.send(`LOGIN_TOKEN ${getCookie("token")}`)
+            socket.send(`TOKEN_LOGIN ${getCookie("token")}`)
         } else
         {
             socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
@@ -104,7 +107,7 @@ function onMessage(e){
                 createCookie("server", ipbox.value)
                 loginform.style.visibility = "hidden";
                 mainpage.style.visibility = "visible";
-                socket.send("GET "+token)
+                socket.send("GET "+ token)
             } else { alert("Login failed."); socket = null }
             break
         case "MSGS":
