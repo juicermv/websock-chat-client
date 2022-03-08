@@ -85,6 +85,7 @@ function handleMessage(message){
         <p>${message["content"]}</p>
     </div>
     `
+
     messagelist.innerHTML+=div
     messagelist.scrollTop = messagelist.scrollHeight
 }
@@ -118,6 +119,7 @@ function onMessage(e){
             } else { alert("Login failed."); socket = null }
             break
         case "MSGS":
+            messagelist.innerHTML = ""
             var jsons = message.substring(message.indexOf(' ') + 1)
             console.log(jsons)
             
@@ -125,6 +127,7 @@ function onMessage(e){
             for (var i = 0; i < json.length; i++){
                 handleMessage(json[i])
             }
+            messagelist.innerHTML+='<div class="messageitem" style="text-align: center;"><h1>~~last 100 messages~~</h1></div>'
             break
         case "MSG":
             var jsons = message.substring(message.indexOf(' ') + 1)
