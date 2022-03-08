@@ -61,7 +61,7 @@ function login(){
         {
             socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
         }
-        keepAlive();
+        //keepAlive();
     }
 
     socket.onclose = function (e) {
@@ -69,7 +69,7 @@ function login(){
         mainpage.style.visibility = "hidden";
         loginform.style.visibility = "visible";
         tm = null;
-        cancelKeepAlive();
+        //cancelKeepAlive();
     }
 }
 
