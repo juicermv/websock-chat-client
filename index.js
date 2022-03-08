@@ -11,14 +11,8 @@ var timerID = 0;
 
 mainpage.style.visibility = "hidden";
 
-if (checkACookieExists("server") && checkACookieExists("token"))
-{
-    ipbox.value = getCookie("server")
-    login()
-}
-
 function keepAlive() { 
-    var timeout = 20000;  
+    var timeout = 50000;  
     if (socket.readyState == socket.OPEN) {  
         socket.send('PING');  
     }  
@@ -50,13 +44,20 @@ function checkACookieExists(cookie) {
     return (document.cookie.split(';').some((item) => item.trim().startsWith(`${cookie}=`))) 
 }
 
+if (checkACookieExists("server") && checkACookieExists("token"))
+{
+    ipbox.value = getCookie("server")
+    login()
+}
+
 function login(){
     socket = checkACookieExists("server") ? new WebSocket("wss://"+getCookie("server")) : new WebSocket("wss://"+ipbox.value.replace("ws://","").replace("wss://", ""))
     socket.onmessage = onMessage;
     socket.onopen = function (e) {
         if(checkACookieExists("token")) {
             socket.send(`TOKEN_LOGIN ${getCookie("token")}`)
-        } else
+        } 
+        else
         {
             socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
         }
