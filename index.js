@@ -11,7 +11,7 @@ var timerID = 0;
 
 mainpage.style.visibility = "hidden";
 
-if (checkACookieExists("server") && checkACookieExists(token))
+if (checkACookieExists("server") && checkACookieExists("token"))
 {
     ipbox.value = getCookie("server")
     login()
