@@ -25,11 +25,37 @@ function cancelKeepAlive() {
     }  
 }
 
+function resetCookie(cookie) {
+    document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure`;
+}
+
+function createCookie(cookie, value) {
+    document.cookie = `${cookie}=${value}; SameSite=Lax; Secure`;
+}
+
+function getCookie(cookie) {
+    return document.cookie
+        .split('; ')
+        .find(row => row.startsWith(`${key}=`))
+        .split('=')[1];
+}
+
+function checkACookieExists(cookie) {
+    return (document.cookie.split(';').some((item) => item.trim().startsWith(`${cookie}=`))) 
+}
+
 function login(){
+    resetCookie("serverip")
+
     socket = new WebSocket("wss://"+ipbox.value.replace("ws://","").replace("wss://", ""))
     socket.onmessage = onMessage;
     socket.onopen = function (e) {
-        socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
+        if(checkACookieExists("token")) {
+            socket.send(`LOGIN_TOKEN ${getCookie("token")}`)
+        } else
+        {
+            socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
+        }
         keepAlive();
     }
 
@@ -69,8 +95,10 @@ function onMessage(e){
     console.log(message)
     switch (splitmessage[0]) {
         case "TOKEN":
+            resetCookie("token")
             if(splitmessage[1] !== "NULL"){
                 token = splitmessage[1]
+                createCookie("token", token)
                 loginform.style.visibility = "hidden";
                 mainpage.style.visibility = "visible";
                 socket.send("GET "+token)
