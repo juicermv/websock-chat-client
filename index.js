@@ -7,6 +7,7 @@ const messagelist = document.getElementById("messagelist")
 const msginput = document.getElementById("msginput")
 var socket = null;
 var token = null;
+var tm = null;
 
 mainpage.style.visibility = "hidden";
 
@@ -17,14 +18,19 @@ function login(){
         setInterval(ping, 30000);
         socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
     }
+
+    socket.onclose = function (e) {
+        alert("Connection terminated.")
+        mainpage.style.visibility = "hidden";
+        loginform.style.visibility = "visible";
+        tm = null;
+    }
 }
 
 function ping() {
     socket.send('__ping__');
     tm = setTimeout(function () {
-        alert("Connection terminated.")
-        mainpage.style.visibility = "hidden";
-        loginform.style.visibility = "visible";
+        ping()
     }, 5000);
 }
 
