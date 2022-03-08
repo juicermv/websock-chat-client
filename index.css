@@ -57,7 +57,9 @@ body{
     display: block;
     color: black;
     border-radius: 15px;
-    border-bottom: 3px black solid;
+    box-shadow: 5px 5px black;
+    margin-bottom: 7px;
+    margin-right: 10px;
     padding: 5px 10px;
     background: white;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -81,18 +83,15 @@ body{
 }
 
 #messagelist {
-    background-color: gainsboro;
+    background-color: none;
     height: 90%;
     width: 100%;
     display: block;
     border-radius: 15px;
-    border-bottom: 3px black solid;
-    overflow-y: hidden;
-}
-
-#messagelist:hover {
+    border:none;
     overflow-y: auto;
 }
+
 
 #messagelist::-webkit-scrollbar {
     width: 1em;
@@ -101,13 +100,13 @@ body{
 
 #messagelist::-webkit-scrollbar-track {
     background: none;
-    border: 3px darkgray dashed;
+    border: 3px black dashed;
     border-radius: 15px;
 }
 
 #messagelist::-webkit-scrollbar-thumb {
-    background-color: none;
-    border: 3px grey solid;
+    background: none;
+    border: 4px solid black;
     border-radius: 15px;
 }
 
@@ -129,7 +128,7 @@ body{
     color: black;
     background: white;
     border: none;
-    border-bottom: 3px solid black;
+    box-shadow: 5px 5px black;
     border-radius: 15px;
     outline: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

@@ -12,11 +12,11 @@ var timerID = 0;
 mainpage.style.visibility = "hidden";
 
 function keepAlive() { 
-    var timeout = 50000;  
+    var timeout = 20000;  
     if (socket.readyState == socket.OPEN) {  
         socket.send('PING');  
     }  
-    timerID = setTimeout(keepAlive, timeout);  
+    timerID = setTimeout(keepAlive, timeout); 
 }
 
 function cancelKeepAlive() {  
