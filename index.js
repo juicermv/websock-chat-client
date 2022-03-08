@@ -75,7 +75,7 @@ function login(){
 
 function handleMessage(message){
     const div = ('color' in message["author"]) ? 
-    `<div class="messageitem">
+    `<div class="messageitem" style="border-left: 5px ${message["author"]["color"]} solid;">
         <h1 style="color: ${message["author"]["color"]};" >${message["author"]["username"]} at ${new Date(message["date"]+" UTC").toLocaleString()}</h1>
         <p>${message["content"]}</p>
     </div>
@@ -88,6 +88,12 @@ function handleMessage(message){
     messagelist.innerHTML+=div
     messagelist.scrollTop = messagelist.scrollHeight
 }
+
+msginput.addEventListener("keyup", function(event) {
+    if (event.code === "Enter" && msginput.value !== "") {
+    	send();
+    }
+});
 
 function send(){
     socket.send(`SEND ${token} ${msginput.value}`)
