@@ -13,14 +13,15 @@ mainpage.style.visibility = "hidden";
 
 function keepAlive() { 
     var timeout = 20000;  
-    if (webSocket.readyState == webSocket.OPEN) {  
-        webSocket.send('');  
+    if (socket.readyState == socket.OPEN) {  
+        socket.send('');  
     }  
-    timerId = setTimeout(keepAlive, timeout);  
-}  
+    timerID = setTimeout(keepAlive, timeout);  
+}
+
 function cancelKeepAlive() {  
-    if (timerId) {  
-        clearTimeout(timerId);  
+    if (timerID) {  
+        clearTimeout(timerID);  
     }  
 }
 
