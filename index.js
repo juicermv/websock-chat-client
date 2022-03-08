@@ -14,13 +14,22 @@ function login(){
     socket = new WebSocket("wss://"+ipbox.value.replace("ws://","").replace("wss://", ""))
     socket.onmessage = onMessage;
     socket.onopen = function (e) {
+        setInterval(ping, 30000);
         socket.send(`LOGIN ${unamebox.value} ${passbox.value}`)
     }
-    socket.onclose = function (e) {
+}
+
+function ping() {
+    ws.send('__ping__');
+    tm = setTimeout(function () {
         alert("Connection terminated.")
         mainpage.style.visibility = "hidden";
         loginform.style.visibility = "visible";
-    }
+    }, 5000);
+}
+
+function pong() {
+    clearTimeout(tm);
 }
 
 function handleMessage(message){
@@ -65,6 +74,9 @@ function onMessage(e){
             var jsons = message.substring(message.indexOf(' ') + 1)
             console.log(jsons)
             handleMessage(JSON.parse(jsons))
+            break
+        case "__pong__":
+            pong()
             break
     }
 }
