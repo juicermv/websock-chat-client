@@ -20,7 +20,7 @@ function login(){
 }
 
 function ping() {
-    ws.send('__ping__');
+    socket.send('__ping__');
     tm = setTimeout(function () {
         alert("Connection terminated.")
         mainpage.style.visibility = "hidden";
