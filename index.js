@@ -39,7 +39,7 @@ function createCookie(cookie, value) {
 function getCookie(cookie) {
     return document.cookie
         .split('; ')
-        .find(row => row.startsWith(`${key}=`))
+        .find(row => row.startsWith(`${cookie}=`))
         .split('=')[1];
 }
 
