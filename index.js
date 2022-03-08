@@ -14,7 +14,7 @@ mainpage.style.visibility = "hidden";
 function keepAlive() { 
     var timeout = 20000;  
     if (socket.readyState == socket.OPEN) {  
-        socket.send('');  
+        socket.send('PING');  
     }  
     timerID = setTimeout(keepAlive, timeout);  
 }
@@ -43,7 +43,12 @@ function login(){
 }
 
 function handleMessage(message){
-    const div = `
+    const div = ('color' in message["author"]) ? 
+    `<div class="messageitem">
+        <h1 style="color: ${message["author"]["color"]};" >${message["author"]["username"]} at ${new Date(message["date"]+" UTC").toLocaleString()}</h1>
+        <p>${message["content"]}</p>
+    </div>
+    ` : `
     <div class="messageitem">
         <h1>${message["author"]["username"]} at ${new Date(message["date"]+" UTC").toLocaleString()}</h1>
         <p>${message["content"]}</p>
@@ -84,9 +89,6 @@ function onMessage(e){
             var jsons = message.substring(message.indexOf(' ') + 1)
             console.log(jsons)
             handleMessage(JSON.parse(jsons))
-            break
-        case "__pong__":
-            pong()
             break
     }
 }
