@@ -44,10 +44,13 @@ function checkACookieExists(cookie) {
     return (document.cookie.split(';').some((item) => item.trim().startsWith(`${cookie}=`))) 
 }
 
-function login(){
-    resetCookie("serverip")
+document.onload = function (e) {
+    if (checkACookieExists("server") && checkACookieExists(token))
+        login()
+}
 
-    socket = new WebSocket("wss://"+ipbox.value.replace("ws://","").replace("wss://", ""))
+function login(){
+    socket = checkACookieExists("server") ? new WebSocket("wss://"+getCookie("server")) : new WebSocket("wss://"+ipbox.value.replace("ws://","").replace("wss://", ""))
     socket.onmessage = onMessage;
     socket.onopen = function (e) {
         if(checkACookieExists("token")) {
@@ -96,9 +99,11 @@ function onMessage(e){
     switch (splitmessage[0]) {
         case "TOKEN":
             resetCookie("token")
+            resetCookie("server")
             if(splitmessage[1] !== "NULL"){
                 token = splitmessage[1]
                 createCookie("token", token)
+                createCookie("server", ipbox.value)
                 loginform.style.visibility = "hidden";
                 mainpage.style.visibility = "visible";
                 socket.send("GET "+token)
