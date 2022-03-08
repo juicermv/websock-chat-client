@@ -31,6 +31,7 @@ function handleMessage(message){
     </div>
     `
     messagelist.innerHTML+=div
+    messagelist.scrollTop = messagelist.scrollHeight
 }
 
 function send(){
