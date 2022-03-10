@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <title>Client</title>
 </head>
 <body>
@@ -21,9 +21,9 @@
     <div id="mainpage">
         <div id="chat">
             <div id="messagelist"></div>
-            <input type="text" id="msginput"class="msginput" placeholder="Message">
+            <textarea id="msginput" class="msginput" placeholder="Message" cols='2' rows='2' wrap="hard"></textarea>
         </div>
     </div>
-    <script src="index.js"></script>
+    <script src="{{url_for('static', filename='index.js')}}"></script>
 </body>
 </html>

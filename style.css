@@ -155,6 +155,7 @@ body{
     margin-bottom: 2%;
     border: solid 1px transparent;
     border-radius: 5px;
+    resize: none;
 }
 
 .msginput::placeholder {

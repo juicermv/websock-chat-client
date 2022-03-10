@@ -74,25 +74,31 @@ function login(){
 }
 
 function handleMessage(message){
-    const div = ('color' in message["author"]) ? 
-    `<div class="messageitem" style="border-left: 5px ${message["author"]["color"]} solid;">
-        <h1 style="color: ${message["author"]["color"]};" >${message["author"]["username"]} at ${new Date(message["date"]+" UTC").toLocaleString()}</h1>
-        <p>${message["content"]}</p>
-    </div>
-    ` : `
-    <div class="messageitem">
-        <h1>${message["author"]["username"]} at ${new Date(message["date"]+" UTC").toLocaleString()}</h1>
-        <p>${message["content"]}</p>
-    </div>
-    `
+    if (message["content"].length > 0) {
+        const div = ('color' in message["author"]) ? 
+        `<div class="messageitem" style="border-left: 5px ${message["author"]["color"]} solid;">
+            <h1 style="color: ${message["author"]["color"]};" >${message["author"]["username"]} at ${new Date(message["date"]+" UTC").toLocaleString()}</h1>
+            <p>${message["content"]}</p>
+        </div>
+        ` : `
+        <div class="messageitem">
+            <h1>${message["author"]["username"]} at ${new Date(message["date"]+" UTC").toLocaleString()}</h1>
+            <p>${message["content"]}</p>
+        </div>
+        `
 
-    messagelist.innerHTML+=div
-    messagelist.scrollTop = messagelist.scrollHeight
+        messagelist.innerHTML+=div
+        messagelist.scrollTop = messagelist.scrollHeight
+    }
 }
 
+let lastkey;
+
 msginput.addEventListener("keyup", function(event) {
-    if (event.code === "Enter" && msginput.value !== "") {
-    	send();
+    if (event.code === "Enter" && msginput.value !== "" && lastkey !== "Shift") {
+        send();
+    } else {
+        lastkey = event.key;
     }
 });
 
