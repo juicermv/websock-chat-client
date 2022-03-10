@@ -62,6 +62,8 @@ body{
     padding: 5px 10px;
     background: white;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .messageitem h1 {
