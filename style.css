@@ -51,6 +51,8 @@ body{
     justify-content:center;
     align-items:center;
     background-color: royalblue;
+    border: solid 1px transparent;
+    border-radius: 5px;
 }
 
 .messageitem {
@@ -60,6 +62,8 @@ body{
     padding: 5px 10px;
     background: white;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: solid 1px transparent;
+    border-radius: 5px;
 }
 
 .messageitem h1 {
