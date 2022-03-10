@@ -94,7 +94,7 @@ body{
 }
 
 #messagelist::-webkit-scrollbar {
-    width: 0.75em;
+    width: 1em;
 }
 
 #messagelist::-webkit-scrollbar-track {
