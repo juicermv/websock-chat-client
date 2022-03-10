@@ -95,12 +95,15 @@ function handleMessage(message){
 let lastkey;
 
 msginput.addEventListener("keyup", function(event) {
-    if (event.code === "Enter" && lastkey === "Shift" && msginput.value !== "") {
+    if (event.code === "Enter" && lastkey !== "Shift" && msginput.value !== "") {
         send();
-    } else {
-        lastkey = event.key;
     }
 });
+
+msginput.addEventListener("keydown", function(event){
+    if (event.key !== "Enter")
+        lastkey = event.key;
+})
 
 function send(){
     socket.send(`SEND ${token} ${msginput.value.replace('\n', '<br>')}`)
