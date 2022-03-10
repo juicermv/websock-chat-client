@@ -136,3 +136,24 @@ function onMessage(e){
             break
     }
 }
+
+
+function showip(){
+    if (document.getElementById('ip').style.display == "none") {
+        document.getElementById('ip').style.display = "block";
+        document.getElementById('showip').innerHTML = "Hide IP";
+    } else {
+        document.getElementById('ip').style.display = "none";
+        document.getElementById('showip').innerHTML = "Show IP";
+    }
+}
+
+function passwordShow(){
+    if (document.getElementById('password').type == "password")
+        document.getElementById('password').type = "text";
+}
+
+function passwordHide(){
+    if (document.getElementById('password').type == "text")
+        document.getElementById('password').type = "password";
+}
