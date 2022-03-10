@@ -90,6 +90,8 @@ function handleMessage(message){
         messagelist.innerHTML+=div
         messagelist.scrollTop = messagelist.scrollHeight
     }
+
+    hljs.initHighlighting();
 }
 
 let lastkey;
@@ -106,8 +108,9 @@ msginput.addEventListener("keydown", function(event){
 })
 
 function send(){
-    socket.send(`SEND ${token} ${msginput.value.replace('\n', '<br>')}`)
-    msginput.value = ""
+    if (msginput.value !== "\n" && msginput.value !== "")
+        socket.send(`SEND ${token} ${msginput.value.replace('\n', '<br>')}`)
+        msginput.value = ""
 }
 
 function onMessage(e){
