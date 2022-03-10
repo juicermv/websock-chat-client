@@ -95,7 +95,7 @@ function handleMessage(message){
 let lastkey;
 
 msginput.addEventListener("keyup", function(event) {
-    if (event.code === "Enter" && msginput.value !== "" && lastkey !== "Shift") {
+    if (event.code === "Enter" && lastkey === "Shift" && msginput.value !== "") {
         send();
     } else {
         lastkey = event.key;
@@ -103,7 +103,7 @@ msginput.addEventListener("keyup", function(event) {
 });
 
 function send(){
-    socket.send(`SEND ${token} ${msginput.value}`)
+    socket.send(`SEND ${token} ${msginput.value.replace('\n', '<br>')}`)
     msginput.value = ""
 }
 
