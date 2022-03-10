@@ -62,8 +62,6 @@ body{
     padding: 5px 10px;
     background: white;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border: solid 1px transparent;
-    border-radius: 5px;
 }
 
 .messageitem h1 {
@@ -78,6 +76,8 @@ body{
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     border: none;
     display: block;
+    border: solid 1px transparent;
+    border-radius: 5px;
 }
 
 #messagelist {
