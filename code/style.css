@@ -85,19 +85,25 @@ body{
     margin: none;
     position: relative;
     overflow-y: auto;
+    border: solid 1px transparent;
+    border-radius: 5px;
 }
 
 #messagelist::-webkit-scrollbar {
-    width: 1em;
+    width: 0.75em;
 }
 
 #messagelist::-webkit-scrollbar-track {
     background: gainsboro;
     margin: 10px 0;
+    border: solid 1px transparent;
+    border-radius: 5px;
 }
 
 #messagelist::-webkit-scrollbar-thumb {
     background: darkgrey;
+    border: solid 1px transparent;
+    border-radius: 5px;
 }
 
 #bottombar *{
