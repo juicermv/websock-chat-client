@@ -84,9 +84,30 @@ function handleMessage(message){
             message["content"] = p1 + p2 + p3;
         }
 
+        var resultStr = ""
+        var ignoreNext = false
+        var codeBlock = false
 
-        message["content"] = tickToPreCode(message["content"]);
-        // message["content"] = newLine(message["content"]);
+        for (var i = 0; i < message["content"].length; i++){
+            const char = message["content"].charAt(i)
+            if(ignoreNext){
+                resultStr += char
+                ignoreNext = false
+            } else if (char === '\\'){
+                ignoreNext = true
+            } else if (char === '`' && !codeBlock){
+                resultStr += "<pre><code>"
+                codeBlock = true
+            } else if (char === '`' && codeBlock){
+                resultStr += "</code></pre>"
+                codeBlock = false
+            } else {
+                resultStr += char
+            }
+        }
+
+        message["content"] = resultStr
+        message["content"] = message["content"].replace("\n","<br>")
 
         const div = ('color' in message["author"]) ? 
         `<div class="messageitem" style="border-left: 5px ${message["author"]["color"]} solid;">
@@ -125,16 +146,8 @@ msginput.addEventListener("keydown", function(event){
 function send(){
     if (msginput.value !== "\n" && msginput.value !== "")
     {
-        if (msginput.value.indexOf('@') != -1){
-            let p1 = msginput.value.split('@')[0] += '<span class="mention">@';
-            let p2 = msginput.value.split('@')[1].split(' ')[0] += '</span>';
-            let p3 = msginput.value.split('@')[1].replace(p2.replace('</span>', ''), '')
-
-            msginput.value = p1 + p2 + p3;
-        }
-
-        msginput.value = msginput.value.replace('<button', '<button disabled');
-        socket.send(`SEND ${token} ${msginput.value.replace('\n', '<br>')}`)
+        // Removed parts here because they're already being done server-side and on receive.
+        socket.send(`SEND ${token} ${msginput.value}`)
         msginput.value = ""
     }
 }
@@ -165,7 +178,8 @@ function onMessage(e){
             for (var i = 0; i < json.length; i++){
                 handleMessage(json[i])
             }
-            messagelist.innerHTML+='<div class="messageitem" style="text-align: center;"><h1>~~last 100 messages~~</h1></div>'
+            // HOW DID YOU MISS THIS???
+            // messagelist.innerHTML+='<div class="messageitem" style="text-align: center;"><h1>~~last 100 messages~~</h1></div>'
             break
         case "MSG":
             var jsons = message.substring(message.indexOf(' ') + 1)
@@ -195,28 +209,3 @@ function passwordHide(){
     if (document.getElementById('password').type == "text")
         document.getElementById('password').type = "password";
 }
-
-function remove100LastMessages(){
-    for (let i = 0; i < messageitems.length; i++){
-        if (messageitems[i].innerHTML.indexOf("~~last 100 messages~~") != -1){
-            messageitems[i].innerHTML = "";
-        }
-    }
-}
-
-messageitems.onload = remove100LastMessages();
-
-function tickToPreCode(el){
-    if (el.indexOf("```") != -1){
-        var lang = el.split("```")[1].split(":")[0]
-        var code = el.split("```")[1].replace(lang + ":", "")
-        return "<pre><code class='language-" + lang + "'>" + code + "</code></pre>"
-    }
-    return el;
-}
-
-// function newLine(el){
-//     if (el.indexOf("\n") != -1){
-//         return el.replace("\n", "<br>")
-//     }
-// }
