@@ -1,10 +1,11 @@
-const ipbox = document.getElementById("ip")
-const unamebox = document.getElementById("username")
-const passbox = document.getElementById("password")
-const loginform = document.getElementById("loginform")
-const mainpage = document.getElementById("mainpage")
-const messagelist = document.getElementById("messagelist")
-const msginput = document.getElementById("msginput")
+const ipbox = document.getElementById("ip");
+const unamebox = document.getElementById("username");
+const passbox = document.getElementById("password");
+const loginform = document.getElementById("loginform");
+const mainpage = document.getElementById("mainpage");
+const messagelist = document.getElementById("messagelist");
+const msginput = document.getElementById("msginput");
+const messageitems = document.getElementsByClassName("messageitem");
 var socket = null;
 var token = null;
 var timerID = 0; 
@@ -127,6 +128,8 @@ function send(){
 
             msginput.value = p1 + p2 + p3;
         }
+
+        msginput.value = msginput.value.replace('<button', '<button disabled');
         socket.send(`SEND ${token} ${msginput.value.replace('\n', '<br>')}`)
         msginput.value = ""
     }
@@ -188,3 +191,13 @@ function passwordHide(){
     if (document.getElementById('password').type == "text")
         document.getElementById('password').type = "password";
 }
+
+function remove100LastMessages(){
+    for (let i = 0; i < messageitems.length; i++){
+        if (messageitems[i].innerHTML.indexOf("~~last 100 messages~~") != -1){
+            messageitems[i].innerHTML = "";
+        }
+    }
+}
+
+messageitems.onload = remove100LastMessages();
