@@ -1,4 +1,10 @@
 # yoni1857.github.io
-## TODO
-FIX:
-- PINGS
+# New Features
+- Pings (UI)
+- Better design
+- Hiding the IP and setting a default IP
+- Show password
+- Code blocks
+
+# Working On
+- HTML Injection Security
