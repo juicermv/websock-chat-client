@@ -75,9 +75,19 @@ function login(){
 
 function handleMessage(message){
     if (message["content"].length > 0) {
+        if (message["content"].indexOf('@') != -1){
+            let p1 = message["content"].split('@')[0] += '<span class="mention">@';
+            let p2 = message["content"].split('@')[1].split(' ')[0] += '</span>';
+            let p3 = message["content"].split('@')[1].replace(p2.replace('</span>', ''), '')
+
+            message["content"] = p1 + p2 + p3;
+        }
+
         const div = ('color' in message["author"]) ? 
         `<div class="messageitem" style="border-left: 5px ${message["author"]["color"]} solid;">
-            <h1 style="color: ${message["author"]["color"]};" >${message["author"]["username"]} at ${new Date(message["date"]+" UTC").toLocaleString()}</h1>
+            <h1 style="color: ${message["author"]["color"]};" >
+                ${message["author"]["username"]} <span class="right">${new Date(message["date"]+" UTC").toLocaleString().split(':')[0].replace(',', ' |') + ":" + new Date(message["date"]+" UTC").toLocaleString().split(':')[1]}</left>
+            </h1>
             <p>${message["content"]}</p>
         </div>
         ` : `
@@ -109,8 +119,17 @@ msginput.addEventListener("keydown", function(event){
 
 function send(){
     if (msginput.value !== "\n" && msginput.value !== "")
+    {
+        if (msginput.value.indexOf('@') != -1){
+            let p1 = msginput.value.split('@')[0] += '<span class="mention">@';
+            let p2 = msginput.value.split('@')[1].split(' ')[0] += '</span>';
+            let p3 = msginput.value.split('@')[1].replace(p2.replace('</span>', ''), '')
+
+            msginput.value = p1 + p2 + p3;
+        }
         socket.send(`SEND ${token} ${msginput.value.replace('\n', '<br>')}`)
         msginput.value = ""
+    }
 }
 
 function onMessage(e){
