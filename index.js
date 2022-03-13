@@ -84,6 +84,10 @@ function handleMessage(message){
             message["content"] = p1 + p2 + p3;
         }
 
+
+        message["content"] = tickToPreCode(message["content"]);
+        // message["content"] = newLine(message["content"]);
+
         const div = ('color' in message["author"]) ? 
         `<div class="messageitem" style="border-left: 5px ${message["author"]["color"]} solid;">
             <h1 style="color: ${message["author"]["color"]};" >
@@ -201,3 +205,18 @@ function remove100LastMessages(){
 }
 
 messageitems.onload = remove100LastMessages();
+
+function tickToPreCode(el){
+    if (el.indexOf("```") != -1){
+        var lang = el.split("```")[1].split(":")[0]
+        var code = el.split("```")[1].replace(lang + ":", "")
+        return "<pre><code class='language-" + lang + "'>" + code + "</code></pre>"
+    }
+    return el;
+}
+
+// function newLine(el){
+//     if (el.indexOf("\n") != -1){
+//         return el.replace("\n", "<br>")
+//     }
+// }
