@@ -85,19 +85,26 @@ function handleMessage(message){
         }
 
         var resultStr = ""
+        var codeLanguage = ""
         var ignoreNext = false
         var codeBlock = false
+        var languageSelect = false
 
         for (var i = 0; i < message["content"].length; i++){
             const char = message["content"].charAt(i)
             if(ignoreNext){
                 resultStr += char
                 ignoreNext = false
+            } else if (languageSelect && char !== ' '){
+                codeLanguage += char
             } else if (char === '\\'){
                 ignoreNext = true
             } else if (char === '`' && !codeBlock){
                 resultStr += "<pre><code>"
+                languageSelect = true
                 codeBlock = true
+            } else if (char === ' ' && languageSelect){
+                languageSelect = false
             } else if (char === '`' && codeBlock){
                 resultStr += "</code></pre>"
                 codeBlock = false
@@ -106,6 +113,7 @@ function handleMessage(message){
             }
         }
 
+        resultStr = resultStr.replace("<code>", `<code class="language-${codeLanguage}">`)
         message["content"] = resultStr
         message["content"] = message["content"].replace("\n","<br>")
 
