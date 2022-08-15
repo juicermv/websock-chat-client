@@ -68,6 +68,8 @@ function sendNotif(){
     }
 }
 
+requestNotifPermission()
+
 function login(){
     socket = checkACookieExists("server") ? new WebSocket("wss://"+getCookie("server")) : new WebSocket("wss://"+ipbox.value.replace("ws://","").replace("wss://", ""))
     socket.onmessage = onMessage;
