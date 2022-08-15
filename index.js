@@ -25,6 +25,8 @@ function cancelKeepAlive() {
     }  
 }
 
+// SCookie stuff
+
 function resetCookie(cookie) {
     document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure`;
 }
@@ -48,6 +50,22 @@ if (checkACookieExists("server") && checkACookieExists("token"))
 {
     ipbox.value = getCookie("server")
     login()
+}
+
+// Notif stuff
+var timeSinceLastNotif = Date.now()
+
+function requestNotifPermission(){
+    if (Notification.permission !== "granted"){
+        Notification.requestPermission()
+    }
+}
+
+function sendNotif(){
+    if(Date.now().getTime() - timeSinceLastNotif.getTime() >= 300000){
+        new Notification("You have new messages!").onclick = Document.getElementById("chat").focus()
+        timeSinceLastNotif = Date.now()
+    }
 }
 
 function login(){
@@ -88,7 +106,10 @@ function handleMessage(message){
 
     messagelist.innerHTML+=div
     messagelist.scrollTop = messagelist.scrollHeight
+
+    sendNotif()
 }
+
 
 msginput.addEventListener("keyup", function(event) {
     if (event.code === "Enter" && msginput.value !== "") {
